@@ -3,6 +3,6 @@
 # To install: pip install -r requirements-dev.txt
 
 # Development tools only - production deps are in requirements.txt
-black>=19.10b0
+black
 isort>=5.3
 pip-tools

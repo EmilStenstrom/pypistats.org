@@ -153,6 +153,12 @@ def package_page(package):
             metadata = requests.get(f"https://pypi.python.org/pypi/{package}/json", timeout=5).json()
             if metadata["info"].get("requires_dist", None):
                 metadata["requires"], metadata["optional"] = _split_dependencies(metadata["info"]["requires_dist"])
+            author = metadata["info"].get("author")
+            if author is None:
+                authors = metadata["info"].get("author_email")
+                if authors:
+                    author = ", ".join([a.strip().rsplit(maxsplit=1)[0] for a in authors.split(",")])
+                    metadata["author"] = author
         except Exception:
             pass
 
